@@ -1,0 +1,84 @@
+<div class="input d-flex flex-column align-items-center">
+  <div class="container text-center pt-5"><h1>PHONE-BOOK</h1></div>
+  <div class="container d-flex flex-column w-25 mt-5">
+    <div class="container mt-3 text-center">
+      <input
+        class="form-control border-primary"
+        type="text"
+        placeholder="Name"
+        id="todo"
+        aria-label="default input example"
+        [(ngModel)]="inputTodo"
+      />
+      <input
+        class="form-control border-primary mt-2"
+        type="text"
+        placeholder="Phone.No"
+        id="todo"
+        aria-label="default input example"
+        [(ngModel)]="inputphone"
+      />
+      <form #loginForm="ngForm">
+        <div>
+          <input
+            class="form-control border-primary mt-2"
+            type="text"
+            placeholder="E-mail"
+            id="todo"
+            aria-label="default input example"
+            [(ngModel)]="inputemail"
+            name="email"
+            ngModel
+            required
+            email
+            #email="ngModel"
+            [ngClass]="email.invalid && email.dirty ? 'is-invalid' : ''"
+          />
+          <div *ngIf="email.invalid && email.dirty" class="invalid-feedback">
+            Please enter a valid email.
+          </div>
+        </div>
+        <button
+          class="btn btn-primary mt-3"
+          (click)="add()"
+          [disabled]="loginForm.invalid"
+        >
+          {{ buttonTxt }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="table-div">
+  <div class="table pt-5">
+    <div class="container w-50">
+      <table class="table table-striped table-hover" id="table">
+        <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider" id="tbody">
+          <tr *ngFor="let item of todos">
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.todo }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.phone }}</td>
+            <td>
+              <button class="btn btn-danger" (click)="del(item.id)">
+                Delete
+              </button>
+            </td>
+            <td>
+              <button class="btn border" (click)="edit(item.id)">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
