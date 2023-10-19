@@ -20,9 +20,7 @@ export class TodoComponent {
     this.todos = testService.getTodo();
   }
 
- 
-
-  add(): void {
+  add(form: NgForm): void {
     if (this.editState === 0) {
       this.count += 1;
       this.todos.push({
@@ -57,6 +55,7 @@ export class TodoComponent {
       console.log(this.todos);
       this.testService.setTodo(this.todos);
     }
+    form.resetForm();
   }
 
   del(id: number): void {

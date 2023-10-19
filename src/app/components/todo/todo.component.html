@@ -10,15 +10,27 @@
         aria-label="default input example"
         [(ngModel)]="inputTodo"
       />
-      <input
-        class="form-control border-primary mt-2"
-        type="text"
-        placeholder="Phone.No"
-        id="todo"
-        aria-label="default input example"
-        [(ngModel)]="inputphone"
-      />
-      <form #loginForm="ngForm">
+      <form #form="ngForm">
+        <div>
+          <input
+            class="form-control border-primary mt-2"
+            type="text"
+            placeholder="Phone.No"
+            id="todo"
+            aria-label="default input example"
+            [(ngModel)]="inputphone"
+            name="phone"
+            ngModel
+            required
+            maxlength="10"
+            minlength="10"
+            #phone="ngModel"
+            [ngClass]="phone.invalid && phone.dirty ? 'is-invalid' : ''"
+          />
+          <div *ngIf="phone.invalid && phone.dirty" class="invalid-feedback">
+            Please enter a valid phone number.
+          </div>
+        </div>
         <div>
           <input
             class="form-control border-primary mt-2"
@@ -40,8 +52,8 @@
         </div>
         <button
           class="btn btn-primary mt-3"
-          (click)="add()"
-          [disabled]="loginForm.invalid"
+          (click)="add(form)"
+          [disabled]="form.invalid"
         >
           {{ buttonTxt }}
         </button>
